@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="">
+<head>
+    <title>My Note Web 2020</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Simple Web Note">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts and icons -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <!-- Material Kit CSS -->
+    <link href="assets/css/material-kit.min.css?v=2.0.7" rel="stylesheet" />
+</head>
+<body>
+    <!--  Header Navigation Bar -->
+    <header class="navbar bg-dark mb-0 fixed-top flex-column position-relative">
+        <h3 class="text-center">My Note Web 2020</h3>
+    </header>
+
+    <!-- Container for FirebaseUI Login -->
+    <div id="firebaseui-auth-container"></div>
+
+    <!-- Footer for Firebase Logo -->
+    <footer class="footer" style="position: absolute; bottom: 0; width: 100%">
+        <div id="firebaselogo-container"  style="margin: 10px auto; text-align: center">
+            <a href="https://firebase.google.com/">
+                <img src="assets/img/logo-built_black.png" alt="built_with_firebase_logo"/>
+            </a>
+        </div>
+    </footer>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
+<script>
+    // This app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBlAV7paAyJd0opf08BTVMsLK2mAZgoxzo",
+        authDomain: "my-note-web-2020.firebaseapp.com",
+        databaseURL: "https://my-note-web-2020.firebaseio.com",
+        projectId: "my-note-web-2020",
+        storageBucket: "my-note-web-2020.appspot.com",
+        messagingSenderId: "451046747887",
+        appId: "1:451046747887:web:287295584649c64c23351a",
+    }
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig)
+</script>
+
+<!-- FirebaseUI.js for Login -->
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+<script>
+    const uiConfig = {
+        callbacks: {
+            signInSuccessWithAuthResult: function (authResult, redirectUrl) {return true}
+        },
+        signInFlow: 'popup',
+        signInSuccessUrl: './note_list.html',
+        signInOptions: [
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        ],
+    }
+    // Initialize FirebaseUI
+    const ui = new firebaseui.auth.AuthUI(firebase.auth())
+    ui.start('#firebaseui-auth-container', uiConfig)
+</script>
+</body>
+</html>

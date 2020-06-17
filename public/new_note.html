@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="">
+<head>
+    <title>My Note Web 2020</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Simple Web Note">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts and icons -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <!-- Material Kit CSS -->
+    <link href="assets/css/material-kit.min.css?v=2.0.7" rel="stylesheet" />
+</head>
+<body>
+    <!--  Header Navigation Bar -->
+    <header class="navbar bg-dark mb-0 fixed-top flex-column position-relative">
+        <h3 class="text-center">My Note Web 2020</h3>
+    </header>
+
+    <!-- Main Contents -->
+    <div class="wrapper">
+        <div class="main-panel" style="float: unset; width: unset;">
+            <div class="content">
+                <div class="container-fluid" style="padding-left: 0; padding-right: 0;">
+                    <div class="container text-center" style="padding-left: 0; padding-right: 0;">
+
+                        <!-- Create-New-Note Button -->
+                        <button disabled type="button" id="create-button" class="btn btn-secondary">Create New Note</button>
+
+                        <!-- Card for New-Note registration -->
+                        <div class="card" style="margin-top: unset;">
+                            <h4 class="card-title text-center">New Note</h4>
+                            <form id="newNoteForm" method="post">
+                                <!-- Input area for "Note" -->
+                                <div class="card-body">
+                                    <label for="note">Type Your Idea Below!!</label>
+                                    <textarea type="text" id="note" class="form-control mb-3" placeholder=""></textarea>
+                                </div>
+                                <!-- Register button -->
+                                <div class="d-flex justify-content-center">
+                                    <input type="submit" id="submit" class="btn btn-info btnSubmit" value="Register"/>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
+<script>
+    // This app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBlAV7paAyJd0opf08BTVMsLK2mAZgoxzo",
+        authDomain: "my-note-web-2020.firebaseapp.com",
+        databaseURL: "https://my-note-web-2020.firebaseio.com",
+        projectId: "my-note-web-2020",
+        storageBucket: "my-note-web-2020.appspot.com",
+        messagingSenderId: "451046747887",
+        appId: "1:451046747887:web:287295584649c64c23351a",
+    }
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig)
+</script>
+<script>
+    // Firebase Auth
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // submit-action for new Note
+            const newNote = document.querySelector('form#newNoteForm')
+            const textarea = document.querySelector('textarea#note')
+            newNote.addEventListener('submit', onFormSubmit)
+            function onFormSubmit(e) {
+                e.preventDefault()
+                if (textarea.value) {
+                    saveNewNote(textarea.value).then(() => {
+                        location.href = 'note_list.html'
+                    })
+                }
+            }
+            function saveNewNote(noteText) {
+                return firebase.firestore().collection('notes').add({
+                    name: firebase.auth().currentUser.displayName,
+                    text: noteText,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                }).catch((error) => {
+                    console.error('Error in writing new note to Firebase Database.', error)
+                })
+            }
+        } else {
+            location.href = '/index.html'
+        }
+    })
+</script>
+</body>
+</html>
