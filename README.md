@@ -1,5 +1,5 @@
 # My Note WEB
 
-Memo-application built with Firebase & Firestore & Javascript.
+Simple Memo & Note web-application built with Firebase & Firestore & Javascript.
 
-https://my-note-web-2020.web.app/note_list.html
+https://my-note-web-2020.web.app
