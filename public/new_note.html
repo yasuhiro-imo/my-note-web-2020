@@ -40,25 +40,26 @@
         <h3 class="text-center">My Note Web 2020</h3>
     </header>
 
-    <!-- Contents start below -->
+    <!-- Main Contents -->
     <div class="wrapper">
         <div class="main-panel" style="float: unset; width: unset;">
             <div class="content">
                 <div class="container-fluid" style="padding-left: 0; padding-right: 0;">
                     <div class="container text-center" style="padding-left: 0; padding-right: 0;">
 
-                        <!-- Create New Note Btn -->
+                        <!-- Create-New-Note Button -->
                         <button disabled type="button" id="create-button" class="btn btn-secondary">Create New Note</button>
 
-                        <!-- Card for new-note-registration -->
+                        <!-- Card for New-Note registration -->
                         <div class="card" style="margin-top: unset;">
                             <h4 class="card-title text-center">New Note</h4>
                             <form id="newNoteForm" method="post">
-                                <!-- input for "Note" -->
+                                <!-- Input area for "Note" -->
                                 <div class="card-body">
-                                    <textarea type="text" id="note" class="form-control mb-3" placeholder="Type Your Idea!!"></textarea>
+                                    <label for="note">Type Your Idea Below!!</label>
+                                    <textarea type="text" id="note" class="form-control mb-3" placeholder=""></textarea>
                                 </div>
-                                <!-- register btn -->
+                                <!-- Register button -->
                                 <div class="d-flex justify-content-center">
                                     <input type="submit" id="submit" class="btn btn-info btnSubmit" value="Register"/>
                                 </div>

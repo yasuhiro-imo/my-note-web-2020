@@ -35,22 +35,22 @@
     <link href="assets/css/material-kit.min.css?v=2.0.7" rel="stylesheet" />
 </head>
 <body>
-    <!--  Header Navigation Bar. -->
+    <!--  Header Navigation Bar -->
     <header class="navbar bg-dark mb-0 fixed-top flex-column position-relative">
         <h3 class="text-center">My Note Web 2020</h3>
     </header>
 
-    <!-- Contents start below -->
+    <!-- Main Contents -->
     <div class="wrapper">
         <div class="main-panel" style="float: unset; width: unset;">
             <div class="content">
                 <div class="container-fluid" style="padding-left: 0; padding-right: 0;">
                     <div class="container text-center" id="container" style="padding-left: 0; padding-right: 0;">
 
-                        <!-- Create New Note Btn -->
+                        <!-- Create-New-Note Button -->
                         <button class="btn btn-secondary" id="create-button" onclick="redirectToNewNoteHtml()">Create New Note</button>
 
-                        <!-- Note List -->
+                        <!-- Container for Note-List -->
                         <div id="note-list-container"></div>
 
                     </div>
@@ -82,8 +82,7 @@
     // Firebase Auth
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            let userName = user.displayName;
-            loadNoteList(userName);
+            loadNoteList(user.displayName);
         } else {
             location.href = "/index.html";
         }
@@ -139,7 +138,7 @@
         pTextElement.textContent = text;
         divNoteCardElement.appendChild(pTextElement);
     }
-    // function "onDeleteNoteBtn()" is used in Line.132: _.setAttribute('onclick', 'onDeleteNoteBtn(this.id)');
+    // function "onDeleteNoteBtn()" is used in function displayNoteCard: ˜.setAttribute('onclick', 'onDeleteNoteBtn(this.id)');
     function onDeleteNoteBtn(id) {
         deleteNoteCard(id).then(function () {
             location.href = "note_list.html";
